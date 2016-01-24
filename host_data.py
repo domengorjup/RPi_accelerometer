@@ -1,4 +1,5 @@
 from time import sleep
+from collections import OrderedDict
 from flask import Flask, render_template
 from MPU6050_test import acc_data
 
@@ -12,16 +13,10 @@ def hello():
 def function(function_name):
     if str(function_name) == "acc_data":
         while True:
-            x, y, z, rx, ry = acc_data()
-            data = {
-                'x': x,
-                'y': y,
-                'z': z,
-                'x_rotation' : rx,
-                'y_rotation' : ry
-                }
-            return render_template('data.html', **data)
-            #sleep(0.5)
+            values = acc_data()
+            keys = ('x', 'y', 'z', 'x_rotation', 'y_rotation')
+            data = OrderedDict(zip(keys, values))
+            return render_template('data.html', data=data)
 
     else:
         value = {'error_message' : "Invalid function! See home page for info."}

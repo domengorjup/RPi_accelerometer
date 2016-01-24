@@ -4,11 +4,8 @@
   </head>
   
   <body>
-    <p>x: {{ x }}g</p>
-    <p>y: {{ y }}g</p>
-    <p>z: {{ z }}g</p>
-    
-    <p>x rotation: {{ x_rotation }}°</p>
-    <p>y rotation: {{ y_rotation }}°</p>
+    {% for key, value in data.items() %}
+      <p>{{ key }}: {{ value }}</p>
+    {% endfor %}
   </body>
 </html>
